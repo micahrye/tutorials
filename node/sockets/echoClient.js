@@ -9,7 +9,8 @@ function done () {
   // Half-closes the socket. i.e., it sends a FIN packet.
   // It is possible the server will still send some data.
   client.end();
-  process.exit()
+  // a bit of overkill, but wanted to include it.
+  process.exit();
 }
 
 client.connect({host: HOST, port: PORT}, (err) => {
@@ -35,6 +36,10 @@ client.on('connect', (err) => {
 
 client.on('data', (data) => {
   console.log(`server says: \"${data}\"`);
+});
+
+client.on('end', (data) => {
+  console.log('server sent FIN');
 });
 
 client.on('close', () => {

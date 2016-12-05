@@ -11,7 +11,7 @@ const server = net.createServer(function(socket) {
   socket.on('data', function(data) {
     console.log(`client@${socket.remoteAddress}: ${data}`);
     // Write the data back to the socket, the client will receive it as data from the server
-    socket.write(`echo: ${data}`);
+    socket.write(`echo: ${data} \n ${txt}`);
   });
 
   // Add a 'close' event handler to this instance of socket
